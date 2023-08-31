@@ -9,7 +9,7 @@ services:
       - mysql
       - redis
     networks:
-      - container_default
+      - docker-default_default
     volumes:
       - ${DOCUMENT_ROOT-./www}:/usr/share/nginx/html
       - ./config/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
@@ -23,7 +23,7 @@ services:
         - mysql
         - redis
       networks:
-        - container_default
+        - docker-default_default
       volumes_from:
         - app
   nginx:
@@ -35,14 +35,14 @@ services:
     depends_on:
       - app
     ports:
-      - "8100:80"
+      - "80:80"
     networks:
-      - container_default
+      - docker-default_default
     volumes_from:
       - app
     volumes:
       - ${VHOSTS_DIR-./config/nginx/sites-enabled}:/etc/nginx/conf.d
       - ${LOG_DIR-./logs/nginx}:/var/log/nginx
 networks:
-  container_default:
+  docker-default_default:
     external: true

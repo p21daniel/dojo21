@@ -15,7 +15,7 @@ let Login = (() => {
                 type: 'POST',
                 data: loginForm,
                 success: function (data) {
-                    window.location.href = 'tela_inicial.php';
+                    window.location.href = '/user';
                 }
             });
         });

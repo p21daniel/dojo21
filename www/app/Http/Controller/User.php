@@ -7,6 +7,11 @@ use App\Http\Controller\Controller;
 
 class User extends Controller
 {
+    public function index()
+    {
+        $this->getView('index', 'home', 'O que é OKR?');
+    }
+
     public function save(){
         $isPost = $_SERVER['REQUEST_METHOD'];
 
@@ -51,6 +56,9 @@ class User extends Controller
         $user->password = $password;
 
         $userModel = new UserModel();
-        if ($userModel->authenticate($user));
+
+        if ($userModel->authenticate($user)) {
+
+        }
     }
 }

@@ -38,8 +38,6 @@ class UserModel
             return false;
         }
 
-        session_start();
-
         $_SESSION['user_id'] = $result['id'];
 
         return true;
