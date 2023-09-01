@@ -13,7 +13,7 @@ class Index extends Controller
      */
     public function index(): void
     {
-        if (session_status() === PHP_SESSION_ACTIVE) {
+        if (isset($_SESSION['user_id'])) {
             header('Location: /user');
             exit;
         }

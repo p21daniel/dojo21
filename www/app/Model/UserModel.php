@@ -20,11 +20,6 @@ class UserModel
 
     public function authenticate(User $user): bool
     {
-        if (session_status() !== PHP_SESSION_NONE) {
-            session_destroy();
-        }
-
-
         $pdoConnection = (new DatabaseConnection())->getConnection();
         $password = md5($user->password);
 
@@ -32,7 +27,6 @@ class UserModel
         $statement->bindParam(':email', $user->email);
 
         if(!$statement->execute()) {
-            session_destroy();
             return false;
         }
 

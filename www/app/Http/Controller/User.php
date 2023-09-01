@@ -9,6 +9,11 @@ class User extends Controller
 {
     public function index()
     {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /');
+            exit;
+        }
+
         $this->getView('index', 'home', 'O que é OKR?');
     }
 
@@ -58,11 +63,21 @@ class User extends Controller
         $userModel = new UserModel();
 
         if ($userModel->authenticate($user)) {
-            session_start();
-
             $this->sendJson([
                 'result' => 'success',
             ]);
+        }
+
+        session_destroy();
+    }
+
+    public function logout()
+    {
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_destroy();
+
+            header('Location: /');
+            exit;
         }
     }
 }

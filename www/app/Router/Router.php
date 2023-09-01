@@ -18,6 +18,10 @@ class Router
      */
     public static function run(): void
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $componentsToLoad = self::defineRouting();
 
         if (class_exists($componentsToLoad['controller'])) {
@@ -28,8 +32,6 @@ class Router
         }
 
         (new Index())->{'fail'}();
-
-        session_start();
     }
 
     /**
@@ -76,7 +78,7 @@ class Router
         }
 
         $controller = !empty($controller) ?
-            'App\Http\Controller\\'. ucwords($controller) :
+            'App\Http\Controller\\'. self::convertName($controller) :
             'App\Http\Controller\Index';
 
         $method = !empty($method) ?
@@ -92,5 +94,18 @@ class Router
             'method' => $method,
             'args' => $args
         ];
+    }
+
+    /**
+     * Method to convert routes with - in the name
+     *
+     * @param $controller
+     * @return array|string
+     */
+    private static function convertName($controller): array|string
+    {
+        $string = str_replace('-', ' ', $controller);
+
+        return str_replace(' ', '', ucwords($string));
     }
 }

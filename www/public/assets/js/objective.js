@@ -8,7 +8,7 @@ let Objective = (() => {
                 type: 'POST',
                 data: userForm,
                 success: function (data) {
-                    window.location.href = 'tela_inicial.php';
+                    window.location.href = '/user';
                 }
             });
         });

@@ -14,9 +14,6 @@ CREATE TABLE user
     PRIMARY KEY (id)
 );
 
-create index fk_user_id_idx on objective (user_id);
-
-
 CREATE TABLE objective
 (
     id          int(10) unsigned not null auto_increment,
@@ -30,8 +27,6 @@ CREATE TABLE objective
     primary key (id),
     constraint fk_objective_user FOREIGN KEY (user_id) REFERENCES user (id) on delete restrict on update restrict
 );
-
-create index fk_user_id_idx on objective (user_id);
 
 CREATE TABLE key_result
 (
@@ -47,4 +42,5 @@ CREATE TABLE key_result
     constraint fk_key_result_objective FOREIGN KEY (objective_id) REFERENCES objective (id) on delete restrict on update restrict
 );
 
+create index fk_user_id_idx on objective (user_id);
 create index fk_objective_id_idx on key_result (objective_id);

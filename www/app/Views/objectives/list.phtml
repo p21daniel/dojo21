@@ -1,0 +1,29 @@
+<nav>
+
+</nav>
+
+<main class="container">
+    <section class="meus-objetivos">
+        <h1>Meus objetivos</h1>
+        <?php foreach ($args['objectives'] as $objective): ?>
+            <div class="objetivo">
+                <?php $keyResults = $args['keyResultsModel']->list($objective['id']); ?>
+                <h3>Título: <?php echo $objective['title']; ?></h3>
+                <h4>Descrição: <?php echo $objective['description']; ?></h4>
+
+                <h4>Key Results:</h4>
+                <ul>
+                    <?php foreach ($keyResults as $keyResult): ?>
+                        <li><strong><?php echo $keyResult['title']; ?></strong></li>
+                        <ul>
+                            <li><strong>Descrição</strong>: <?=$keyResult['description']?></li>
+                            <li><strong>Tipo</strong>: <?= $keyResult['type'] === 1 ? 'Milestone' : 'Porcentagem'   ?></li>
+                        </ul>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+
+            <hr>
+        <?php endforeach; ?>
+    </section>
+</main>

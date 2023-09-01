@@ -22,7 +22,7 @@ abstract class Controller
      * @param $title
      * @return void
      */
-    public function getView ($viewName, $viewFolder = '', $title = 'OKR') {
+    public function getView ($viewName, $viewFolder = '', $title = 'OKR', $args = []) {
         $viewStart = $this->path . 'base/start.phtml';
         $viewBody = $this->path . $viewFolder . '/' . $viewName . '.phtml';
         $viewEnd = $this->path . 'base/end.phtml';
