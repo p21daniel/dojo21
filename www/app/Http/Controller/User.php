@@ -58,7 +58,11 @@ class User extends Controller
         $userModel = new UserModel();
 
         if ($userModel->authenticate($user)) {
+            session_start();
 
+            $this->sendJson([
+                'result' => 'success',
+            ]);
         }
     }
 }

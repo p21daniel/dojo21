@@ -15,7 +15,11 @@ let Login = (() => {
                 type: 'POST',
                 data: loginForm,
                 success: function (data) {
-                    window.location.href = '/user';
+                    let dataJson = JSON.parse(data);
+
+                    if(dataJson.result == 'success') {
+                        window.location.href = '/user';
+                    }
                 }
             });
         });
