@@ -5,7 +5,7 @@ namespace App\Model;
 use App\Entity\DatabaseConnection;
 use App\Entity\ObjectiveEntity;
 
-class ObjectiveModel
+class ObjectiveModel extends Model
 {
     public function save(ObjectiveEntity $objective){
         $pdoConnection = (new DatabaseConnection())->getConnection();
@@ -28,13 +28,12 @@ class ObjectiveModel
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function list2(int $id) {
-        $pdoConnection = (new DatabaseConnection())->getConnection();
-        $statement = $pdoConnection->prepare("SELECT title, description FROM objective WHERE objective.id = :id");
+    public function find(int $id) {
+        $statement = $this->getConn()->prepare("SELECT title, description FROM objective WHERE objective.id = :id");
         $statement->bindParam(':id', $id);
         $statement->execute();
 
-        $result =  $statement->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         return reset($result);
     }

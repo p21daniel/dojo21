@@ -10,11 +10,22 @@ let User = (() => {
                 type: 'POST',
                 data: userForm,
                 success: function (data) {
-                    let dataJson = JSON.parse(data);
+                    let response = JSON.parse(data);
 
-                    if(dataJson.result == 'success') {
-                        window.location.href = '/';
+                    if(response.success) {
+                        window.location.href = '/user';
+                        return;
                     }
+
+                    if (Array.isArray(response.message)) {
+                        response.message.forEach(function (item) {
+                            alert(item);
+                        })
+
+                        return;
+                    }
+
+                    alert(response.message);
                 }
             });
         });
@@ -26,6 +37,7 @@ let User = (() => {
         }
     }
 })();
+
 $(document).ready(() => {
    User.init();
 });

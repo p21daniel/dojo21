@@ -6,26 +6,44 @@ use App\Entity\DatabaseConnection;
 use App\Entity\User;
 use PDO;
 
-class UserModel
+/**
+ * User Model
+ */
+class UserModel extends Model
 {
-    public function save($name, $email, $password){
-        $pdoConnection = (new DatabaseConnection())->getConnection();
+    /**
+     * @param $name
+     * @param $email
+     * @param $password
+     * @return bool
+     */
+    public function save($name, $email, $password): bool
+    {
         $password = md5($password);
 
-        /** @var $pdoConnection PDO */
-        $statement = $pdoConnection->prepare("INSERT INTO user (name, email, password) values (:name, :email, :password)");
+        $statement = $this->getConn()->prepare("INSERT INTO user (name, email, password) values (:name, :email, :password)");
         $statement->bindParam(':name', $name);
         $statement->bindParam(':email', $email);
         $statement->bindParam(':password', $password);
+
         $statement->execute();
+
+        if ($statement->rowCount() > 0) {
+            return true;
+        }
+
+        return false;
     }
 
+    /**
+     * @param User $user
+     * @return bool
+     */
     public function authenticate(User $user): bool
     {
-        $pdoConnection = (new DatabaseConnection())->getConnection();
         $password = md5($user->password);
 
-        $statement = $pdoConnection->prepare("SELECT * FROM user WHERE email = :email");
+        $statement = $this->getConn()->prepare("SELECT * FROM user WHERE email = :email");
         $statement->bindParam(':email', $user->email);
 
         if(!$statement->execute()) {
@@ -34,7 +52,7 @@ class UserModel
 
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
 
-        if ($result['password'] != $password) {
+        if (!$result || $result['password'] != $password) {
             return false;
         }
 

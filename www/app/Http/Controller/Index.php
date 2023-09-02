@@ -13,11 +13,7 @@ class Index extends Controller
      */
     public function index(): void
     {
-        if (isset($_SESSION['user_id'])) {
-            header('Location: /user');
-            exit;
-        }
-
+        $this->aclAuth();
         $this->getView('login', 'auth', 'Faça seu Login');
     }
 

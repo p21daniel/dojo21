@@ -1,5 +1,5 @@
 let Objective = (() => {
-    let handleForm = () => {
+    let handleForm = function() {
         $('#objective-form').submit(function (event) {
             let userForm = $(this).serialize();
             event.preventDefault();
@@ -8,7 +8,14 @@ let Objective = (() => {
                 type: 'POST',
                 data: userForm,
                 success: function (data) {
-                    window.location.href = '/user';
+                    let response = JSON.parse(data);
+
+                    if(response.success) {
+                        window.location.href = '/objective/list';
+                        return;
+                    }
+
+                    alert(response.message);
                 }
             });
         });
@@ -41,7 +48,7 @@ let Objective = (() => {
                 },
 
                 success: function (data) {
-                    window.location.href = '/user';
+                    window.location.href = '/objective';
                 }
             });
         })
@@ -54,6 +61,7 @@ let Objective = (() => {
         }
     }
 })();
+
 $(document).ready(() => {
     Objective.init();
 });

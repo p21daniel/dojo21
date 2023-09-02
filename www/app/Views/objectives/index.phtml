@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var $args array
+ */
+?>
+
+<main class="container">
+    <section class="text-center">
+        <h2>Adicionar Objetivo</h2>
+        <form method="POST" id="objective-form" class="form">
+            <div class="form-group">
+                <label for="title">
+                    <span>Título: </span>
+                    <input type="text" name="title" id="title" value="<?= $args['oldData']['title'] ?? '' ?>" required>
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="description">
+                    <span>Descrição: </span>
+                    <input type="text" id="description" name="description" value="<?= $args['oldData']['description'] ?? '' ?>" required>
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="type">
+                    <input style="display: none" type="text" name="id" value="<?= $args['oldData']['id'] ?? '' ?>" required>
+                </label>
+            </div>
+            <button class="btn" type="submit">Adicionar</button>
+            <a class="btn" href="<?= $_SERVER['HTTP_REFERER']; ?>">Voltar</a>
+            </div>
+        </form>
+    </section>
+</main>
+
+<script src="../../assets/js/objective.js?v=<?= time() ?>" type="text/javascript"></script>

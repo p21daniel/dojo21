@@ -1,25 +1,23 @@
 let Login = (() => {
-    let validateForm = () => {
-
-    }
-
-    let handleForm = () => {
+    let handleForm = function (){
         $('#login-form').submit(function (event) {
             event.preventDefault();
-            let loginForm = $(this).serialize();
 
-            validateForm();
+            let loginForm = $(this).serialize();
 
             $.ajax({
                 url: '/user/login',
                 type: 'POST',
                 data: loginForm,
                 success: function (data) {
-                    let dataJson = JSON.parse(data);
+                    let response = JSON.parse(data);
 
-                    if(dataJson.result == 'success') {
+                    if(response.success) {
                         window.location.href = '/user';
+                        return;
                     }
+
+                    alert(response.message);
                 }
             });
         });
@@ -31,6 +29,7 @@ let Login = (() => {
         }
     }
 })();
+
 $(document).ready(() => {
    Login.init();
 });

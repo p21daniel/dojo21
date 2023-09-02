@@ -2,77 +2,46 @@
 
 namespace App\Http\Controller;
 
-use App\Model\ObjectiveModel;
 use App\Model\UserModel;
-use App\Http\Controller\Controller;
 
+/**
+ * User Controller
+ */
 class User extends Controller
 {
-    public function index()
+    /**
+     * @return void
+     */
+    public function index(): void
     {
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /');
-            exit;
-        }
-
-        $oldDataToUpdate = null;
-
-        if (isset($_SESSION['edit_id'])) {
-            $oldDataToUpdate = (new ObjectiveModel())->list2($_SESSION['edit_id']);
-            $oldDataToUpdate['id'] = $_SESSION['edit_id'];
-
-            unset($_SESSION['edit_id']);
-        }
-
-        $args = [
-            'oldData' => $oldDataToUpdate
-        ];
-
-        $this->getView('index', 'home', 'O que é OKR?', $args);
+        $this->aclAllowed();
+        $this->getView('index', 'home', 'O que é OKR?');
     }
 
-    public function register()
+    /**
+     * @return void
+     */
+    public function register(): void
     {
+        $this->aclAuth();
         $this->getView('register', 'auth', 'Cadastrar');
     }
 
-    public function save(){
-        $isPost = $_SERVER['REQUEST_METHOD'];
-
-        if ($isPost === 'POST') {
-            $name = $_POST['name'] ?: '';
-            $email = $_POST['email'] ?: '';
-            $password = $_POST['password'] ?: '';
-
-            if(empty($name)) {
-                $this->sendJson([
-                    'result' => 'error',
-                    'message' => 'Invalid name'
-                ]);
-            }
-
-            (new UserModel())->save($name, $email, $password);
-
-            $this->sendJson([
-                'result' => 'success',
-            ]);
-        }
-    }
-
+    /**
+     * @return void
+     */
     public function login()
     {
-        $isPost = $_SERVER['REQUEST_METHOD'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $messages = [];
 
-        if ($isPost === 'POST') {
             $email = $_POST['email'] ?: '';
             $password = $_POST['password'] ?: '';
 
-            if (!$email || !$password) {
-                $this->sendJson([
-                    'result' => 'error',
-                    'message' => 'Usuário ou senha inválidos'
-                ]);
-            }
+            $this->baseFormCheck([
+                'email' => $email,
+                'password' => $password
+            ]);
         }
 
         $user = new \App\Entity\User();
@@ -83,13 +52,21 @@ class User extends Controller
 
         if ($userModel->authenticate($user)) {
             $this->sendJson([
-                'result' => 'success',
+                'success' => true,
             ]);
         }
 
         session_destroy();
+
+        $this->sendJson([
+            'success' => false,
+            'message' => 'O e-mail ou senha informados são inválidos'
+        ]);
     }
 
+    /**
+     * @return void
+     */
     public function logout()
     {
         if (session_status() === PHP_SESSION_ACTIVE) {
@@ -97,6 +74,38 @@ class User extends Controller
 
             header('Location: /');
             exit;
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function save()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $messages = [];
+
+            $name =  $_POST['name'] ?: '';
+            $email = $_POST['email'] ?: '';
+            $password =  $_POST['password'] ?: '';
+            $passwordCheck =  $_POST['password-check'] ?: '';
+
+            $this->baseFormCheck([
+                'name' => $name,
+                'email' => $email,
+                'password' => $password,
+                'password-check' => $passwordCheck
+            ], true);
+
+            if((new UserModel())->save($name, $email, $password)) {
+                $this->sendJson([
+                    'success' => true,
+                ]);
+            }
+
+            $this->sendJson([
+                'success' => false,
+            ]);
         }
     }
 }
