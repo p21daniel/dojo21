@@ -4,17 +4,19 @@ namespace App\Model;
 
 use App\Entity\DatabaseConnection;
 use App\Entity\User;
+use PDO;
 
 class UserModel
 {
     public function save($name, $email, $password){
         $pdoConnection = (new DatabaseConnection())->getConnection();
+        $password = md5($password);
 
         /** @var $pdoConnection PDO */
         $statement = $pdoConnection->prepare("INSERT INTO user (name, email, password) values (:name, :email, :password)");
         $statement->bindParam(':name', $name);
         $statement->bindParam(':email', $email);
-        $statement->bindParam(':password', md5($password));
+        $statement->bindParam(':password', $password);
         $statement->execute();
     }
 

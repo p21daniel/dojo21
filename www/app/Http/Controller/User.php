@@ -17,6 +17,11 @@ class User extends Controller
         $this->getView('index', 'home', 'O que é OKR?');
     }
 
+    public function register()
+    {
+        $this->getView('register', 'auth', 'Cadastrar');
+    }
+
     public function save(){
         $isPost = $_SERVER['REQUEST_METHOD'];
 
