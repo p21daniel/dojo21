@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var $args array
+ */
+?>
+
 <nav>
 
 </nav>
@@ -19,14 +25,20 @@
             <div class="">
                 <label for="title">
                     <span>Título: </span>
-                    <input type="text" name="title" id="title" value="">
+                    <input type="text" name="title" id="title" value="<?= $args['oldData']['title'] ?? '' ?>">
                 </label>
             </div>
 
             <div class="">
                 <label for="description">
                     <span>Descrição: </span>
-                    <input type="text" id="description" name="description" value="">
+                    <input type="text" id="description" name="description" value="<?= $args['oldData']['description'] ?? '' ?>">
+                </label>
+            </div>
+
+            <div class="">
+                <label for="type">
+                    <input style="display: none" type="text" name="id" value="<?= $args['oldData']['id'] ?? '' ?>">
                 </label>
             </div>
 

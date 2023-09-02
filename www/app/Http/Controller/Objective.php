@@ -36,13 +36,52 @@ class Objective extends Controller
         if ($isPost === 'POST') {
             $title = $_POST['title'] ?: '';
             $description = $_POST['description'] ?: '';
+            $id = $_POST['id'] ?: false;
 
             $objective = new ObjectiveEntity();
             $objective->setUser($_SESSION['user_id']);
             $objective->setTitle($title);
             $objective->setDescription($description);
 
+            if ($id) {
+                (new ObjectiveModel())->update($objective, $id);
+
+                $this->sendJson([
+                    'result' => 'success',
+                ]);
+            }
+
             (new ObjectiveModel())->save($objective);
+
+            $this->sendJson([
+                'result' => 'success',
+            ]);
+        }
+    }
+
+    public function remove()
+    {
+        $isPost = $_SERVER['REQUEST_METHOD'];
+
+        if ($isPost === 'POST' && isset($_POST['id']) && $_POST['id'] != '') {
+            if ((new ObjectiveModel())->remove($_POST['id'])) {
+                $this->sendJson([
+                    'result' => 'success'
+                ]);
+            }
+
+            $this->sendJson([
+                'result' => 'error'
+            ]);
+        }
+    }
+
+    public function edit()
+    {
+        $isPost = $_SERVER['REQUEST_METHOD'];
+
+        if ($isPost === 'POST' && isset($_POST['id']) && $_POST['id'] != '') {
+            $_SESSION['edit_id'] = $_POST['id'];
 
             $this->sendJson([
                 'result' => 'success',

@@ -27,4 +27,52 @@ class ObjectiveModel
 
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function list2(int $id) {
+        $pdoConnection = (new DatabaseConnection())->getConnection();
+        $statement = $pdoConnection->prepare("SELECT title, description FROM objective WHERE objective.id = :id");
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+
+        $result =  $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        return reset($result);
+    }
+
+    public function remove(int $id) {
+        $pdoConnection = (new DatabaseConnection())->getConnection();
+
+        $lista = (new KeyResultModel())->listSemDeletados($id);
+
+        if (count($lista)) {
+            return false;
+        }
+
+        $statement = $pdoConnection->prepare("UPDATE objective SET deleted_at = NOW() WHERE id = :id");
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+
+        if ($statement->rowCount()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function update(ObjectiveEntity $keyResultEntity, int $id) {
+        $pdoConnection = (new DatabaseConnection())->getConnection();
+        $statement = $pdoConnection->prepare("UPDATE objective SET title = :title, description = :description, updated_at = NOW() WHERE id = :id");
+
+        $statement->execute([
+            ':title' =>  $keyResultEntity->getTitle(),
+            ':description' => $keyResultEntity->getDescription(),
+            ':id' => $id
+        ]);
+
+        if ($statement->rowCount()) {
+            return true;
+        }
+
+        return false;
+    }
 }

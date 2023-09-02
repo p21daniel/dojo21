@@ -2,6 +2,7 @@
 
 namespace App\Http\Controller;
 
+use App\Model\ObjectiveModel;
 use App\Model\UserModel;
 use App\Http\Controller\Controller;
 
@@ -14,7 +15,20 @@ class User extends Controller
             exit;
         }
 
-        $this->getView('index', 'home', 'O que é OKR?');
+        $oldDataToUpdate = null;
+
+        if (isset($_SESSION['edit_id'])) {
+            $oldDataToUpdate = (new ObjectiveModel())->list2($_SESSION['edit_id']);
+            $oldDataToUpdate['id'] = $_SESSION['edit_id'];
+
+            unset($_SESSION['edit_id']);
+        }
+
+        $args = [
+            'oldData' => $oldDataToUpdate
+        ];
+
+        $this->getView('index', 'home', 'O que é OKR?', $args);
     }
 
     public function register()
