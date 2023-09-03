@@ -1,23 +1,21 @@
 <main class="container">
-    <section class="form text-center">
-        <h2>Login</h2>
+    <section class="form login">
+        <div class="field">
 
-        <form method="POST" id="login-form" >
-            <div class="form-group">
-                <label for="email">
-                    <span>Email: </span>
-                    <input type="email" placeholder="Digite aqui o e-mail" id="email" name="email" required>
-                </label>
-            </div>
-            <div class="form-group">
-                <label for="password">
-                    <span>Senha: </span>
-                    <input type="password" placeholder="Digite aqui a senha" id="password" name="password" required>
-                </label>
-            </div>
-            <button class="btn" type="submit">Entrar</button>
-        </form>
-        <a href="/user/register" class="btn">Cadastrar</a>
+            <form method="POST" id="login-form" >
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label for="email"><span>Email</span></label>
+                    <input type="email" placeholder="Informe o e-mail" id="email" class="input-form" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password"><span>Senha</span></label>
+                    <input type="password" placeholder="Informe a senha" id="password" class="input-form" name="password" required>
+                </div>
+                <button class="btn" type="submit">Entrar</button>
+                <a href="/user/register" class="btn">Cadastrar</a>
+            </form>
+        </div>
     </section>
 </main>
 
