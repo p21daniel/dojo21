@@ -1,5 +1,5 @@
 let Login = (() => {
-    let handleForm = function (){
+    let handleForm = function () {
         $('#login-form').submit(function (event) {
             event.preventDefault();
 

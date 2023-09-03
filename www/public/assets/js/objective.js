@@ -1,8 +1,10 @@
 let Objective = (() => {
-    let handleForm = function() {
+    let handleForm = function (){
         $('#objective-form').submit(function (event) {
             let userForm = $(this).serialize();
+
             event.preventDefault();
+
             $.ajax({
                 url: '/objective/save',
                 type: 'POST',
@@ -21,9 +23,9 @@ let Objective = (() => {
         });
     }
 
-    let handleButtons = function () {
-        $('#objective_remove_button').click(function (){
-            let id = $('#objective_remove_button').val();
+    let handleButtons = function (){
+        $(document).on('click', '#objective_remove_button', function (){
+            let id = $(this).val();
 
             $.ajax({
                 url: '/objective/remove',
@@ -32,13 +34,20 @@ let Objective = (() => {
                     id: id
                 },
                 success: function (data) {
-                    window.location.href = '/objective/list';
+                    let response = JSON.parse(data);
+
+                    if(response.success) {
+                        window.location.href = '/objective/list';
+                        return;
+                    }
+
+                    alert(response.message);
                 }
             });
         })
 
-        $('#objective_edit_button').click(function (){
-            let id = $('#objective_edit_button').val();
+        $(document).on('click', '#objective_edit_button', function (){
+            let id = $(this).val();
 
             $.ajax({
                 url: '/objective/edit',
@@ -48,7 +57,14 @@ let Objective = (() => {
                 },
 
                 success: function (data) {
-                    window.location.href = '/objective';
+                    let response = JSON.parse(data);
+
+                    if(response.success) {
+                        window.location.href = '/objective';
+                        return;
+                    }
+
+                    alert(response.message);
                 }
             });
         })

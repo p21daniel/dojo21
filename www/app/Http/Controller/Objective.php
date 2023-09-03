@@ -5,11 +5,16 @@ namespace App\Http\Controller;
 use App\Entity\ObjectiveEntity;
 use App\Model\KeyResultModel;
 use App\Model\ObjectiveModel;
-use App\Usefull\Validator;
 
+/**
+ * Objective Controller
+ */
 class Objective extends Controller
 {
-    public function index()
+    /**
+     * @return void
+     */
+    public function index(): void
     {
         $this->aclAllowed();
         $oldDataToUpdate = null;
@@ -28,62 +33,12 @@ class Objective extends Controller
         $this->getView('index', 'objectives', 'O que é OKR?', $args);
     }
 
-    public function save(){
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $title = $_POST['title'] ?: '';
-            $description = $_POST['description'] ?: '';
-            $id = $_POST['id'] ?: false;
-
-            $messages = (new Validator())->isEmpty([
-                'title' => $title,
-                'description' => $description,
-            ]);
-
-            if (count($messages) > 0) {
-                $this->sendJson([
-                    'success' => false,
-                    'message' => $messages
-                ]);
-            }
-
-            $objective = new ObjectiveEntity();
-            $objective->setUser($_SESSION['user_id']);
-            $objective->setTitle($title);
-            $objective->setDescription($description);
-
-            if ($id) {
-                if((new ObjectiveModel())->update($objective, $id)) {
-                    $this->sendJson([
-                        'result' => 'success',
-                    ]);
-                }
-
-                $this->sendJson([
-                    'result' => 'success',
-                ]);
-
-            }
-
-            (new ObjectiveModel())->save($objective);
-
-            $this->sendJson([
-                'result' => 'success',
-            ]);
-        }
-    }
-
-
-
-
-
-
-
-    public function list()
+    /**
+     * @return void
+     */
+    public function list(): void
     {
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /');
-            exit;
-        }
+        $this->aclAllowed();
 
         $objectiveModel = new ObjectiveModel();
         $keyResultsModel = new KeyResultModel();
@@ -98,34 +53,102 @@ class Objective extends Controller
         $this->getView('list', 'objectives', 'Meus objetivos', $args);
     }
 
-
-
-    public function remove()
+    /**
+     * @return void
+     */
+    public function save(): void
     {
-        $isPost = $_SERVER['REQUEST_METHOD'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $title = $_POST['title'] ?: '';
+            $description = $_POST['description'] ?: '';
+            $id = $_POST['id'] ?: false;
 
-        if ($isPost === 'POST' && isset($_POST['id']) && $_POST['id'] != '') {
-            if ((new ObjectiveModel())->remove($_POST['id'])) {
+            $this->baseFormCheck([
+                'title' => $title,
+                'description' => $description
+            ]);
+
+            $objective = new ObjectiveEntity();
+            $objective->setUser($_SESSION['user_id']);
+            $objective->setTitle($title);
+            $objective->setDescription($description);
+
+            $this->update($id, $objective);
+
+            if ((new ObjectiveModel())->save($objective)) {
                 $this->sendJson([
-                    'result' => 'success'
+                    'success' => true,
                 ]);
             }
 
             $this->sendJson([
-                'result' => 'error'
+                'success' => false,
             ]);
         }
     }
 
-    public function edit()
+    /**
+     * @param mixed $id
+     * @param ObjectiveEntity $objective
+     * @return void
+     */
+    public function update(mixed $id, ObjectiveEntity $objective): void
     {
-        $isPost = $_SERVER['REQUEST_METHOD'];
+        if (!$id) {
+            return;
+        }
 
-        if ($isPost === 'POST' && isset($_POST['id']) && $_POST['id'] != '') {
+        if ((new ObjectiveModel())->update($objective, $id)) {
+            $this->sendJson([
+                'success' => true,
+            ]);
+        }
+
+        $this->sendJson([
+            'success' => false,
+            'message' => 'Ocorreu um problema ao atualizar o objetivo'
+        ]);
+    }
+
+    /**
+     * @return void
+     */
+    public function edit(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && $_POST['id'] != '') {
             $_SESSION['edit_id'] = $_POST['id'];
 
             $this->sendJson([
-                'result' => 'success',
+                'success' => true,
+            ]);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function remove(): void
+    {
+        $id = $_POST['id'];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($id) && $id != '') {
+            $lista = (new KeyResultModel())->findNotDeleted($id);
+
+            if (count($lista)) {
+                $this->sendJson([
+                    'success' => false,
+                    'message' => 'Não é possível remover um model com resultados chave vinculados'
+                ]);
+            }
+
+            if ((new ObjectiveModel())->remove($id)) {
+                $this->sendJson([
+                    'success' => true
+                ]);
+            }
+
+            $this->sendJson([
+                'success' => false
             ]);
         }
     }

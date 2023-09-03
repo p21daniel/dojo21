@@ -6,14 +6,17 @@ use App\Entity\KeyResultEntity;
 use App\Model\KeyResultModel;
 use App\Model\ObjectiveModel;
 
+/**
+ * KeyResult Controller
+ */
 class KeyResult extends Controller
 {
-    public function index()
+    /**
+     * @return void
+     */
+    public function index(): void
     {
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /');
-            exit;
-        }
+        $this->aclAllowed();
 
         $objectiveModel = new ObjectiveModel();
         $objectives = $objectiveModel->list($_SESSION['user_id']);
@@ -34,15 +37,24 @@ class KeyResult extends Controller
         $this->getView('index', 'key-results', 'Adicionar Key Result', $args);
     }
 
-    public function save(){
-        $isPost = $_SERVER['REQUEST_METHOD'];
-
-        if ($isPost === 'POST') {
+    /**
+     * @return void
+     */
+    public function save(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title = $_POST['title'] ?: '';
             $objetiveId = $_POST['objective_id'] ?: '';
             $description = $_POST['description'] ?: '';
             $type = $_POST['type'] ?: '';
             $id = $_POST['id'] ?: false;
+
+            $this->baseFormCheck([
+                'title' => $title,
+                'description' => $description,
+                'objective_id' => $objetiveId,
+                'type' => $type,
+            ]);
 
             $keyResultEntity = new KeyResultEntity();
             $keyResultEntity->setDescription($description);
@@ -50,48 +62,71 @@ class KeyResult extends Controller
             $keyResultEntity->setTitle($title);
             $keyResultEntity->setObjectiveId($objetiveId);
 
-            if ($id) {
-                (new KeyResultModel())->update($keyResultEntity, $id);
+            $this->update($id, $keyResultEntity);
 
+            if((new KeyResultModel())->save($keyResultEntity)){
                 $this->sendJson([
-                    'result' => 'success',
-                ]);
-            }
-
-            (new KeyResultModel())->save($keyResultEntity);
-
-            $this->sendJson([
-                'result' => 'success',
-            ]);
-        }
-    }
-
-    public function remove()
-    {
-        $isPost = $_SERVER['REQUEST_METHOD'];
-
-        if ($isPost === 'POST' && isset($_POST['id']) && $_POST['id'] != '') {
-            if ((new KeyResultModel())->remove($_POST['id'])) {
-                $this->sendJson([
-                    'result' => 'success'
+                    'success' => true,
                 ]);
             }
 
             $this->sendJson([
-                'result' => 'error'
+                'success' => false,
             ]);
         }
     }
 
-    public function edit()
+    /**
+     * @param mixed $id
+     * @param KeyResultEntity $keyResult
+     * @return void
+     */
+    public function update(mixed $id, KeyResultEntity $keyResult): void
     {
-        $isPost = $_SERVER['REQUEST_METHOD'];
+        if (!$id) {
+            return;
+        }
 
-        if ($isPost === 'POST' && isset($_POST['id']) && $_POST['id'] != '') {
+        if ((new KeyResultModel())->update($keyResult, $id)) {
+            $this->sendJson([
+                'success' => true,
+            ]);
+        }
+
+        $this->sendJson([
+            'success' => false,
+            'message' => 'Ocorreu um problema ao atualizar o resultado chave'
+        ]);
+    }
+
+    /**
+     * @return void
+     */
+    public function edit(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && $_POST['id'] != '') {
             $_SESSION['edit_id'] = $_POST['id'];
 
             $this->sendJson([
-                'result' => 'success',
+                'success' => true,
+            ]);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function remove(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && $_POST['id'] != '') {
+            if ((new KeyResultModel())->remove($_POST['id'])) {
+                $this->sendJson([
+                    'success' => true,
+                ]);
+            }
+
+            $this->sendJson([
+                'success' => false,
             ]);
         }
     }

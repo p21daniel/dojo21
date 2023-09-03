@@ -2,9 +2,7 @@
 
 namespace App\Model;
 
-use App\Entity\DatabaseConnection;
 use App\Entity\User;
-use PDO;
 
 /**
  * User Model

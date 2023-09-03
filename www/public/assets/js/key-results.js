@@ -1,5 +1,5 @@
 let KeyResult = (() => {
-    let handleForm = () => {
+    let handleForm = function (){
         $('#key-result-form').submit(function (event) {
             let keyResultForm = $(this).serialize();
 
@@ -10,15 +10,22 @@ let KeyResult = (() => {
                 type: 'POST',
                 data: keyResultForm,
                 success: function (data) {
-                    window.location.href = '/objective/list';
+                    let response = JSON.parse(data);
+
+                    if(response.success) {
+                        window.location.href = '/objective/list';
+                        return;
+                    }
+
+                    alert(response.message);
                 }
             });
         });
     }
 
     let handleButtons = function () {
-        $('#key_result_remove_button').click(function (){
-            let id = $('#key_result_remove_button').val();
+        $(document).on('click', '#key_result_remove_button', function (){
+            let id = $(this).val();
 
             $.ajax({
                 url: '/key-result/remove',
@@ -27,13 +34,20 @@ let KeyResult = (() => {
                     id: id
                 },
                 success: function (data) {
-                    window.location.href = '/objective/list';
+                    let response = JSON.parse(data);
+
+                    if(response.success) {
+                        window.location.href = '/objective/list';
+                        return;
+                    }
+
+                    alert(response.message);
                 }
             });
         })
 
-        $('#key_result_edit_button').click(function (){
-            let id = $('#key_result_edit_button').val();
+        $(document).on('click', '#key_result_edit_button', function (){
+            let id = $(this).val();
 
             $.ajax({
                 url: '/key-result/edit',
@@ -43,7 +57,14 @@ let KeyResult = (() => {
                 },
 
                 success: function (data) {
-                    window.location.href = '/key-result';
+                    let response = JSON.parse(data);
+
+                    if(response.success) {
+                        window.location.href = '/key-result';
+                        return;
+                    }
+
+                    alert(response.message);
                 }
             });
         })

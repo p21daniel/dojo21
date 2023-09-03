@@ -2,33 +2,54 @@
 
 namespace App\Model;
 
-use App\Entity\DatabaseConnection;
 use App\Entity\ObjectiveEntity;
 
+/**
+ * Objetive Model
+ */
 class ObjectiveModel extends Model
 {
-    public function save(ObjectiveEntity $objective){
-        $pdoConnection = (new DatabaseConnection())->getConnection();
+    /**
+     * @param ObjectiveEntity $objective
+     * @return bool
+     */
+    public function save(ObjectiveEntity $objective): bool
+    {
+        $statement = $this->getConn()->prepare("INSERT INTO objective (user_id, title, description) values (:user_id, :title, :description)");
 
-        /** @var $pdoConnection PDO */
-        $statement = $pdoConnection->prepare("INSERT INTO objective (user_id, title, description) values (:user_id, :title, :description)");
         $statement->execute([
             ':user_id' => $objective->getUser(),
             ':title' =>  $objective->getTitle(),
             ':description' => $objective->getDescription(),
         ]);
+
+        if ($statement->rowCount() > 0) {
+            return true;
+        }
+
+        return false;
     }
 
-    public function list(int $userId) {
-        $pdoConnection = (new DatabaseConnection())->getConnection();
-        $statement = $pdoConnection->prepare("SELECT * FROM objective WHERE objective.user_id = :user_id");
+    /**
+     * @param int $userId
+     * @return array|false
+     */
+    public function list(int $userId): array|false
+    {
+        $statement = $this->getConn()->prepare("SELECT * FROM objective WHERE objective.user_id = :user_id");
         $statement->bindParam(':user_id', $userId);
+
         $statement->execute();
 
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function find(int $id) {
+    /**
+     * @param int $id
+     * @return bool|object
+     */
+    public function find(int $id): bool|object
+    {
         $statement = $this->getConn()->prepare("SELECT title, description FROM objective WHERE objective.id = :id");
         $statement->bindParam(':id', $id);
         $statement->execute();
@@ -38,16 +59,13 @@ class ObjectiveModel extends Model
         return reset($result);
     }
 
-    public function remove(int $id) {
-        $pdoConnection = (new DatabaseConnection())->getConnection();
-
-        $lista = (new KeyResultModel())->listSemDeletados($id);
-
-        if (count($lista)) {
-            return false;
-        }
-
-        $statement = $pdoConnection->prepare("UPDATE objective SET deleted_at = NOW() WHERE id = :id");
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function remove(int $id): bool
+    {
+        $statement = $this->getConn()->prepare("UPDATE objective SET deleted_at = NOW() WHERE id = :id");
         $statement->bindParam(':id', $id);
         $statement->execute();
 
@@ -58,9 +76,14 @@ class ObjectiveModel extends Model
         return false;
     }
 
-    public function update(ObjectiveEntity $keyResultEntity, int $id) {
-        $pdoConnection = (new DatabaseConnection())->getConnection();
-        $statement = $pdoConnection->prepare("UPDATE objective SET title = :title, description = :description, updated_at = NOW() WHERE id = :id");
+    /**
+     * @param ObjectiveEntity $keyResultEntity
+     * @param int $id
+     * @return bool
+     */
+    public function update(ObjectiveEntity $keyResultEntity, int $id): bool
+    {
+        $statement = $this->getConn()->prepare("UPDATE objective SET title = :title, description = :description, updated_at = NOW() WHERE id = :id");
 
         $statement->execute([
             ':title' =>  $keyResultEntity->getTitle(),
