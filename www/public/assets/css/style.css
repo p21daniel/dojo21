@@ -45,6 +45,10 @@ button, a {
     text-decoration: none;
 }
 
+li {
+    list-style: none;
+}
+
 body {
     background: ghostwhite;
 }
@@ -54,10 +58,12 @@ label {
     text-align: left;
     font-size: 14px;
     color: dimgrey;
+    margin-top: 2px;
 }
 
 /* BASE */
 .container {
+    padding: 30px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -65,14 +71,16 @@ label {
 
 .btn {
     display: block;
-    width: auto;
-    background-color: #22b8f5;
+    margin-top: 5px;
+    width: 80%;
+    text-align: center;
+    background-color: #212121;
     text-decoration: none;
     padding: 4px 0;
     border-radius: 5px;
-    color: white;
-    margin: 5px;
+    color: whitesmoke;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -99,23 +107,55 @@ label {
     margin: 5px;
     border-radius: 3px;
     width: auto;
+    background: ghostwhite;
 }
-
-
 
 #login-form {
     border: 1px solid grey;
-    padding: 40px;
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
+.navbar-itens li {
+    display: inline;
+}
 
+.navbar h2 {
+    display: inline;
+}
+
+.navbar {
+    background: #212121;
+    color: ghostwhite;
+    padding: 1px;
+}
+
+.navbar-itens li a{
+    display: inline;
+    color: ghostwhite;
+    margin-left: 15px;
+}
+
+.navbar-itens li{
+    display: inline;
+    color: ghostwhite;
+}
 
 .jumbotron {
     background-color: whitesmoke;
     margin: 0;
 }
 
+.home h2 {
+    margin-bottom: 20px;
+}
 
+.home h4 {
+    margin-top: 20px;
+}
 
 
 
