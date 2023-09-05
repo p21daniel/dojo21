@@ -46,9 +46,9 @@ class ObjectiveModel extends Model
 
     /**
      * @param int $id
-     * @return bool|object
+     * @return array
      */
-    public function find(int $id): bool|object
+    public function find(int $id): array
     {
         $statement = $this->getConn()->prepare("SELECT title, description FROM objective WHERE objective.id = :id");
         $statement->bindParam(':id', $id);

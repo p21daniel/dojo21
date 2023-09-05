@@ -22,7 +22,26 @@
 }
 
 .btn:hover {
-    background-color: #00709e
+    background-color: #BDBDBD;
+    color: #212121;
+}
+
+.jumbotron {
+    background-color: #212121;
+    color: ghostwhite;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.jumbotron h2{
+    color: ghostwhite;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
 
 /* LOGIN */
@@ -121,16 +140,7 @@
 
 
 
-.jumbotron {
-    background-color: #212121;
-    color: ghostwhite;
-    border-radius: 8px;
-    padding: 30px;
-}
 
-.jumbotron h2{
-    color: ghostwhite;
-}
 
 .home h2 {
     margin-bottom: 20px;
@@ -156,17 +166,25 @@ section {
     margin: 10px 0;
 }
 
-.meus-objetivos {
+
+
+.objective {
+    /*padding: 5px;*/
+    /*margin: 5px;*/
+
+    display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.objetivo {
-    padding: 5px;
+.objective, ul {
+    margin: 15px;
+}
+
+
+
+.objective .btn {
+    width: 30px;
     margin: 5px;
-    background-color: #e3e3e3;
-    border-radius: 5px;
-}
-
-.objetivo, ul {
-    margin: 10px;
 }

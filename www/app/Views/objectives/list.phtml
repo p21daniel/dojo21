@@ -4,36 +4,36 @@
  */
 ?>
 
-<nav>
-
-</nav>
-
 <main class="container">
-    <section class="meus-objetivos">
-        <h1>Meus objetivos</h1>
+    <section>
+        <h2>Meus Objetivos</h2>
         <?php foreach ($args['objectives'] as $objective): ?>
             <?php if(!$objective['deleted_at']): ?>
-                <div class="objetivo">
+                <div class="objective">
                     <?php $keyResults = $args['keyResultsModel']->list($objective['id']); ?>
                     <h3>Título: <?php echo $objective['title']; ?></h3>
                     <h4>Descrição: <?php echo $objective['description']; ?></h4>
-                    <button class="btn" id="objective_remove_button" value="<?= $objective['id'];?>">Remover</button>
-                    <button class="btn" id="objective_edit_button" value="<?= $objective['id'];?>">Editar</button>
+                    <div class="action">
+                        <button class="btn" id="objective_remove_button" value="<?= $objective['id'];?>"><i class="fa-solid fa-trash"></i></button>
+                        <button class="btn" id="objective_edit_button" value="<?= $objective['id'];?>"><i class="fa-solid fa-pen"></i></button>
+                    </div>
 
-                    <h4>Key Results:</h4>
-                    <ul>
-                        <?php foreach ($keyResults as $keyResult): ?>
-                            <?php if(!$keyResult['deleted_at']): ?>
-                                <li><strong><?php echo $keyResult['title']; ?></strong></li>
-                                <ul>
-                                    <li><strong>Descrição</strong>: <?=$keyResult['description']?></li>
-                                    <li><strong>Tipo</strong>: <?= $keyResult['type'] == 1 ? 'Milestone' : 'Porcentagem'   ?></li>
-                                </ul>
-                                <button class="btn" id="key_result_remove_button" value="<?= $keyResult['id'];?>">Remover</button>
-                                <button class="btn" id="key_result_edit_button" value="<?= $keyResult['id'];?>">Editar</button>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </ul>
+                    <?php if ($keyResults): ?>
+                        <h3>Resultados Chave</h3>
+                        <ul>
+                            <?php foreach ($keyResults as $keyResult): ?>
+                                <?php if(!$keyResult['deleted_at']): ?>
+                                    <li><strong><?php echo $keyResult['title']; ?></strong></li>
+                                    <ul>
+                                        <li><strong>Descrição</strong>: <?=$keyResult['description']?></li>
+                                        <li><strong>Tipo</strong>: <?= $keyResult['type'] == 1 ? 'Milestone' : 'Porcentagem'   ?></li>
+                                    </ul>
+                                    <button class="btn" id="key_result_remove_button" value="<?= $keyResult['id'];?>"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn" id="key_result_edit_button" value="<?= $keyResult['id'];?>"><i class="fa-solid fa-pen"></i></button>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
                 </div>
             <?php endif; ?>
             <hr>
