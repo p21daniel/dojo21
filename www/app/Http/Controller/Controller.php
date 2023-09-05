@@ -27,6 +27,7 @@ abstract class Controller
     public function getView ($viewName, $viewFolder = '', $title = 'OKR', $args = []): void
     {
         $viewStart = $this->path . 'base/start.phtml';
+        $viewNavbar = $this->path . 'base/navbar.phtml';
         $viewBody = $this->path . $viewFolder . '/' . $viewName . '.phtml';
         $viewEnd = $this->path . 'base/end.phtml';
 
@@ -35,6 +36,11 @@ abstract class Controller
                 $_GET['title'] = $title;
 
                 include_once $viewStart;
+
+                if ($viewName != 'login') {
+                    include_once $viewNavbar;
+                }
+
                 include_once $viewBody;
                 include_once $viewEnd;
 

@@ -1,67 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Livvic:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
 
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-}
 
-h1 {
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
-
-h2 {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    color: dimgrey;
-}
-
-h3 {
-    margin-top: 2.5px;
-    margin-bottom: 5px;
-}
-
-h4 {
-    margin-top: 1.25px;
-    margin-bottom: 5px;
-}
-
-h5 {
-    margin-top: 0.63px;
-    margin-bottom: 5px;
-}
-
-h6 {
-    margin-top: 0.3px;
-    margin-bottom: 5px;
-}
-
-button, a {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    text-decoration: none;
-}
-
-li {
-    list-style: none;
-}
-
-body {
-    background: ghostwhite;
-}
-
-label {
-    display: block;
-    text-align: left;
-    font-size: 14px;
-    color: dimgrey;
-    margin-top: 2px;
-}
-
-/* BASE */
 .container {
     padding: 30px;
     display: flex;
@@ -87,12 +25,13 @@ label {
     background-color: #00709e
 }
 
-/* SPECIFIC */
+/* LOGIN */
 .login {
     height: 90vh;
     width: 100vw;
     display: flex;
 }
+
 .field {
     display: flex;
     justify-content: center;
@@ -106,7 +45,7 @@ label {
     padding: 4px 10px;
     margin: 5px;
     border-radius: 3px;
-    width: auto;
+    width: 250px;
     background: ghostwhite;
 }
 
@@ -119,18 +58,20 @@ label {
     flex-direction: column;
 }
 
-.navbar-itens li {
-    display: inline;
+/* NAVBAR */
+.navbar {
+    background: #212121;
+    color: ghostwhite;
+    padding: 1px;
 }
 
 .navbar h2 {
     display: inline;
 }
 
-.navbar {
-    background: #212121;
+.navbar-itens li {
+    display: inline;
     color: ghostwhite;
-    padding: 1px;
 }
 
 .navbar-itens li a{
@@ -139,14 +80,56 @@ label {
     margin-left: 15px;
 }
 
-.navbar-itens li{
-    display: inline;
-    color: ghostwhite;
+/* OBJECTIVE */
+#objective-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
+#objective-form .btn {
+    width: 100px;
+}
+
+/* KEY RESULT */
+#key-result-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#key-result-form .btn {
+    width: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .jumbotron {
-    background-color: whitesmoke;
-    margin: 0;
+    background-color: #212121;
+    color: ghostwhite;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.jumbotron h2{
+    color: ghostwhite;
 }
 
 .home h2 {

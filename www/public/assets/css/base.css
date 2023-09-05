@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Livvic:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: dimgrey;
+}
+
+h3 {
+    margin-top: 2.5px;
+    margin-bottom: 5px;
+}
+
+h4 {
+    margin-top: 1.25px;
+    margin-bottom: 5px;
+}
+
+h5 {
+    margin-top: 0.63px;
+    margin-bottom: 5px;
+}
+
+h6 {
+    margin-top: 0.3px;
+    margin-bottom: 5px;
+}
+
+button, a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    background: ghostwhite;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    color: dimgrey;
+    margin-top: 2px;
+}
+
+select {
+    width: 250px;
+    box-sizing: content-box;
+    padding: 4px 10px;
+    margin: 5px;
+    border-radius: 3px;
+    background: ghostwhite;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
