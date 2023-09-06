@@ -61,11 +61,11 @@ label {
 }
 
 select {
-    width: 250px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    width: 220px;
     box-sizing: content-box;
-    padding: 4px 10px;
-    margin: 5px;
-    border-radius: 3px;
+    margin-bottom: 10px;
     background: ghostwhite;
 }
 

@@ -78,11 +78,11 @@
 }
 
 .input-form {
-    padding: 4px 10px;
-    margin: 5px;
-    border-radius: 3px;
-    width: 250px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    width: 220px;
     background: ghostwhite;
+    margin-bottom: 10px;
 }
 
 #login-form {
@@ -146,17 +146,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
 }
 
-.cards .objective {
+.cards .card-body {
     margin: 15px;
+    padding: 50px;
 }
 
 /* OBJECTIVE */
-.objective {
-    /*padding: 5px;*/
-    /*margin: 5px;*/
+.card-body {
     border-radius: 5px;
     box-shadow: 7px 7px 15px 7px rgb(50, 50, 50, 0.20);
     padding: 30px;
@@ -167,7 +166,7 @@
     flex-direction: column;
 }
 
-.objective .btn {
+.card-body .btn {
     width: 30px;
     margin: 5px;
 }
@@ -178,4 +177,23 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 500px) and (max-width: 9999px) {
+    .cards {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+}
+
+
+.form-group label {
+    margin-top: 10px;
+}
+
+.cards .card-body .jumbotron {
+    padding: 48px;
 }
