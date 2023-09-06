@@ -5,41 +5,59 @@
 ?>
 
 <main class="container">
-    <section>
-        <h2>Meus Objetivos</h2>
+    <h2 class="text-center">Meus Objetivos</h2>
+    <div class="cards">
         <?php foreach ($args['objectives'] as $objective): ?>
-            <?php if(!$objective['deleted_at']): ?>
-                <div class="objective">
-                    <?php $keyResults = $args['keyResultsModel']->list($objective['id']); ?>
-                    <h3>Título: <?php echo $objective['title']; ?></h3>
-                    <h4>Descrição: <?php echo $objective['description']; ?></h4>
-                    <div class="action">
-                        <button class="btn" id="objective_remove_button" value="<?= $objective['id'];?>"><i class="fa-solid fa-trash"></i></button>
-                        <button class="btn" id="objective_edit_button" value="<?= $objective['id'];?>"><i class="fa-solid fa-pen"></i></button>
-                    </div>
 
-                    <?php if ($keyResults): ?>
-                        <h3>Resultados Chave</h3>
-                        <ul>
-                            <?php foreach ($keyResults as $keyResult): ?>
-                                <?php if(!$keyResult['deleted_at']): ?>
-                                    <li><strong><?php echo $keyResult['title']; ?></strong></li>
-                                    <ul>
-                                        <li><strong>Descrição</strong>: <?=$keyResult['description']?></li>
-                                        <li><strong>Tipo</strong>: <?= $keyResult['type'] == 1 ? 'Milestone' : 'Porcentagem'   ?></li>
-                                    </ul>
-                                    <button class="btn" id="key_result_remove_button" value="<?= $keyResult['id'];?>"><i class="fa-solid fa-trash"></i></button>
-                                    <button class="btn" id="key_result_edit_button" value="<?= $keyResult['id'];?>"><i class="fa-solid fa-pen"></i></button>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
-            <hr>
+
+
+
+                <?php if(!$objective['deleted_at']): ?>
+                    <div class="objective">
+                        <?php $keyResults = $args['keyResultsModel']->list($objective['id']); ?>
+
+                        <div class="objective-group">
+                            <h3>Objetivo: <?php echo $objective['title']; ?></h3>
+                            <h4>Descrição: <?php echo $objective['description']; ?></h4>
+
+                            <div class="action">
+                                <button class="btn" id="objective_remove_button" value="<?= $objective['id'];?>"><i class="fa-solid fa-trash"></i></button>
+                                <button class="btn" id="objective_edit_button" value="<?= $objective['id'];?>"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        </div>
+
+                        <?php if ($keyResults): ?>
+                            <div class="key-result-group">
+                                <hr class="separator">
+                                <h3>Resultados Chave</h3>
+                                <?php foreach ($keyResults as $key => $keyResult): ?>
+                                    <?php if(!$keyResult['deleted_at']): ?>
+                                        <h3><?php echo $keyResult['title']; ?></h3>
+
+                                            <h4><strong>Descrição</strong>: <?=$keyResult['description']?></h4>
+                                            <h5><strong>Tipo</strong>: <?= $keyResult['type'] == 1 ? 'Milestone' : 'Porcentagem'   ?></h5>
+
+                                        <div class="action">
+                                            <button class="btn" id="key_result_remove_button" value="<?= $keyResult['id'];?>"><i class="fa-solid fa-trash"></i></button>
+                                            <button class="btn" id="key_result_edit_button" value="<?= $keyResult['id'];?>"><i class="fa-solid fa-pen"></i></button>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                <?php endif; ?>
+
+
+
         <?php endforeach; ?>
+        </div>
+    <div class="control">
+        <a class="btn" href="<?= $_SERVER['HTTP_REFERER']; ?>"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+    </div>
     </section>
-    <a class="btn" href="<?= $_SERVER['HTTP_REFERER']; ?>">Voltar</a>
+
 </main>
 
 <script src="../../assets/js/key-results.js" type="text/javascript"></script>

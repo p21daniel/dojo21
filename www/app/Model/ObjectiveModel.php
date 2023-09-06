@@ -36,7 +36,7 @@ class ObjectiveModel extends Model
      */
     public function list(int $userId): array|false
     {
-        $statement = $this->getConn()->prepare("SELECT * FROM objective WHERE objective.user_id = :user_id");
+        $statement = $this->getConn()->prepare("SELECT * FROM objective WHERE objective.user_id = :user_id AND deleted_at IS NULL");
         $statement->bindParam(':user_id', $userId);
 
         $statement->execute();
