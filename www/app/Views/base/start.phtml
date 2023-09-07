@@ -1,7 +1,10 @@
 <?php
-/**
- * @var $args array
- */
+    /** @var $args array */
+    /** @var $viewName */
+    /** @var $viewNavbar */
+
+    $flash = $_SESSION['flash'] ?? false;
+    unset($_SESSION['flash']);
 ?>
 
 <!DOCTYPE html>
@@ -16,3 +19,12 @@
     <script src="https://kit.fontawesome.com/9328e4f09b.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<?php
+    if (!in_array($viewName, ['login', 'register'])) {
+        include_once $viewNavbar;
+    }
+ ?>
+<main class="container">
+    <?php if($flash): ?>
+        <div class="flash"><?= $flash ?></div>
+    <?php endif;?>

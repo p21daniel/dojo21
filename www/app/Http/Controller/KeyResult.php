@@ -5,6 +5,7 @@ namespace App\Http\Controller;
 use App\Entity\KeyResultEntity;
 use App\Model\KeyResultModel;
 use App\Model\ObjectiveModel;
+use App\Util\Message;
 
 /**
  * KeyResult Controller
@@ -65,6 +66,8 @@ class KeyResult extends Controller
             $this->update($id, $keyResultEntity);
 
             if((new KeyResultModel())->save($keyResultEntity)){
+                $_SESSION['flash'] = Message::KEY_RESULT_SAVED;
+
                 $this->sendJson([
                     'success' => true,
                 ]);
@@ -88,6 +91,8 @@ class KeyResult extends Controller
         }
 
         if ((new KeyResultModel())->update($keyResult, $id)) {
+            $_SESSION['flash'] = Message::KEY_RESULT_EDITED;
+
             $this->sendJson([
                 'success' => true,
             ]);
@@ -95,7 +100,7 @@ class KeyResult extends Controller
 
         $this->sendJson([
             'success' => false,
-            'message' => 'Ocorreu um problema ao atualizar o resultado chave'
+            'message' => Message::KEY_RESULT_SAVE_ERROR
         ]);
     }
 
@@ -120,6 +125,8 @@ class KeyResult extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && $_POST['id'] != '') {
             if ((new KeyResultModel())->remove($_POST['id'])) {
+                $_SESSION['flash'] = Message::KEY_RESULT_REMOVED;
+
                 $this->sendJson([
                     'success' => true,
                 ]);

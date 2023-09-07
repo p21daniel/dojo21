@@ -2,7 +2,8 @@
 
 namespace App\Http\Controller;
 
-use App\Usefull\Validator;
+use App\Util\Message;
+use App\Util\Validator;
 use Exception;
 
 /**
@@ -39,11 +40,6 @@ abstract class Controller
 
         include_once $viewStart;
         include_once $viewModal;
-
-        if (!in_array($viewName, ['login', 'register'])) {
-            include_once $viewNavbar;
-        }
-
         include_once $viewBody;
         include_once $viewEnd;
     }
@@ -60,7 +56,7 @@ abstract class Controller
         $messages = (new Validator())->isEmpty($fields);
 
         if ($checkPassword && !Validator::isSamePassword($fields['password'], $fields['password-check'])) {
-            $messages[] = 'As senhas não são iguais';
+            $messages[] = Message::NOT_EQUAL_PASSWORD;
         }
 
         if (count($messages) > 0) {

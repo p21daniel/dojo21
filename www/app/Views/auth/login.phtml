@@ -1,23 +1,21 @@
-<main class="container">
-    <section class="cards center-card">
-        <div class="card-body">
-            <form method="POST" id="login-form" >
-                <h2>Login</h2>
-                <div class="form-group">
-                    <label for="email"><span>Email</span></label>
-                    <input type="email" placeholder="Informe o e-mail" id="email" class="input-form" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password"><span>Senha</span></label>
-                    <input type="password" placeholder="Informe a senha" id="password" class="input-form" name="password" required>
-                </div>
-                <div class="action">
-                    <button class="btn btn-custom" type="submit"><i class="fa-solid fa-door-closed"></i> Entrar</button>
-                    <a href="/user/register" class="btn btn-custom"><i class="fa-regular fa-user"></i> Cadastrar</a>
-                </div>
-            </form>
-        </div>
-    </section>
-</main>
+<section class="cards center-card">
+    <div class="card-body">
+        <form method="POST" id="login-form" >
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="email"><span>Email</span></label>
+                <input type="email" placeholder="Informe o e-mail" id="email" class="input-form" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password"><span>Senha</span></label>
+                <input type="password" placeholder="Informe a senha" id="password" class="input-form" name="password" required>
+            </div>
+            <div class="action">
+                <button class="btn btn-custom" type="submit"><i class="fa-solid fa-door-closed"></i> Entrar</button>
+                <a href="/user/register" class="btn btn-custom"><i class="fa-regular fa-user"></i> Cadastrar</a>
+            </div>
+        </form>
+    </div>
+</section>
 
 <script src="../../assets/js/login.js?v=<?= time() ?>" type="text/javascript"></script>

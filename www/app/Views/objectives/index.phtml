@@ -4,30 +4,28 @@
  */
 ?>
 
-<main class="container">
-    <section class="cards center-card">
-        <div class="card-body">
-            <form method="POST" id="objective-form" class="form">
-                <h2><i class="fa-solid fa-plus"></i> Objetivo</h2>
-                <hr class="separator">
-                <div class="form-group ">
-                    <label for="title"><span>Título</span></label>
-                    <input type="text" name="title" id="title" class="input-form" placeholder="Informe o título" value="<?= $args['oldData']['title'] ?? '' ?>" required>
-                </div>
-                <div class="form-group">
-                    <label for="description"><span>Descrição</span></label>
-                    <input type="text" id="description" class="input-form" placeholder="Informe a descrição" name="description" value="<?= $args['oldData']['description'] ?? '' ?>" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="input-form hide" name="id" value="<?= $args['oldData']['id'] ?? '' ?>">
-                </div>
-                <div class="action">
-                    <button class="btn btn-success" type="submit"><i class="fa-solid fa-plus"></i></button>
-                    <a class="btn btn-primary" href="<?= $_SERVER['HTTP_REFERER']; ?>"><i class="fa-solid fa-arrow-left"></i></a>
-                </div>
-            </form>
-        </div>
-    </section>
-</main>
+<section class="cards center-card">
+    <div class="card-body">
+        <form method="POST" id="objective-form" class="form">
+            <h2><i class="fa-solid fa-plus"></i> Objetivo</h2>
+            <hr class="separator">
+            <div class="form-group ">
+                <label for="title"><span>Título</span></label>
+                <input type="text" name="title" id="title" class="input-form" placeholder="Informe o título" value="<?= $args['oldData']['title'] ?? '' ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="description"><span>Descrição</span></label>
+                <input type="text" id="description" class="input-form" placeholder="Informe a descrição" name="description" value="<?= $args['oldData']['description'] ?? '' ?>" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="input-form hide" name="id" value="<?= $args['oldData']['id'] ?? '' ?>">
+            </div>
+            <div class="action">
+                <button class="btn btn-success" type="submit"><i class="fa-solid fa-plus"></i></button>
+                <a class="btn btn-primary" href="<?= $_SERVER['HTTP_REFERER']; ?>"><i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+        </form>
+    </div>
+</section>
 
 <script src="../../assets/js/objective.js?v=<?= time() ?>" type="text/javascript"></script>

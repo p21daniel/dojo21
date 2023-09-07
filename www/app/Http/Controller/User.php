@@ -3,6 +3,7 @@
 namespace App\Http\Controller;
 
 use App\Model\UserModel;
+use App\Util\Message;
 
 /**
  * User Controller
@@ -60,7 +61,7 @@ class User extends Controller
 
         $this->sendJson([
             'success' => false,
-            'message' => 'O e-mail ou senha informados são inválidos'
+            'message' => Message::USER_REGISTER_ERROR
         ]);
     }
 
@@ -98,6 +99,8 @@ class User extends Controller
             ], true);
 
             if((new UserModel())->save($name, $email, $password)) {
+                $_SESSION['flash'] = Message::USER_REGISTERED;
+
                 $this->sendJson([
                     'success' => true,
                 ]);

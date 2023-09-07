@@ -5,6 +5,7 @@ namespace App\Http\Controller;
 use App\Entity\ObjectiveEntity;
 use App\Model\KeyResultModel;
 use App\Model\ObjectiveModel;
+use App\Util\Message;
 
 /**
  * Objective Controller
@@ -76,6 +77,8 @@ class Objective extends Controller
             $this->update($id, $objective);
 
             if ((new ObjectiveModel())->save($objective)) {
+                $_SESSION['flash'] = Message::OBJECTIVE_SAVED;
+
                 $this->sendJson([
                     'success' => true,
                 ]);
@@ -99,6 +102,8 @@ class Objective extends Controller
         }
 
         if ((new ObjectiveModel())->update($objective, $id)) {
+            $_SESSION['flash'] = Message::OBJECTIVE_EDITED;
+
             $this->sendJson([
                 'success' => true,
             ]);
@@ -106,7 +111,7 @@ class Objective extends Controller
 
         $this->sendJson([
             'success' => false,
-            'message' => 'Ocorreu um problema ao atualizar o objetivo'
+            'message' => Message::OBJECTIVE_SAVE_ERROR
         ]);
     }
 
@@ -137,11 +142,13 @@ class Objective extends Controller
             if (count($lista)) {
                 $this->sendJson([
                     'success' => false,
-                    'message' => 'Não é possível remover um model com resultados chave vinculados'
+                    'message' => Message::OBJECTIVE_CONSTRAINT
                 ]);
             }
 
             if ((new ObjectiveModel())->remove($id)) {
+                $_SESSION['flash'] = Message::OBJECTIVE_REMOVED;
+
                 $this->sendJson([
                     'success' => true
                 ]);

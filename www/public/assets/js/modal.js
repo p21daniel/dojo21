@@ -8,6 +8,8 @@ const Modal = function () {
 
             modal.removeClass('show');
             modal.addClass('hide');
+
+            return true;
         });
 
         window.onclick = function(event) {
@@ -15,6 +17,8 @@ const Modal = function () {
 
                 modal.removeClass('show');
                 modal.addClass('hide');
+
+                return true;
             }
         }
     }
