@@ -24,41 +24,19 @@ abstract class Controller
      * @param array $args
      * @return void
      */
-    public function getView ($viewName, $viewFolder = '', $title = 'OKR', $args = []): void
+    public function getView ($viewName, string $viewFolder = '', string $title = 'OKR', array $args = []): void
     {
+        $args['title'] = $title;
         $viewStart = $this->path . 'base/start.phtml';
         $viewNavbar = $this->path . 'base/navbar.phtml';
         $viewModal = $this->path . 'base/modal.phtml';
         $viewBody = $this->path . $viewFolder . '/' . $viewName . '.phtml';
         $viewEnd = $this->path . 'base/end.phtml';
 
-        try {
-            if (file_exists($viewStart) && file_exists($viewBody) && file_exists($viewEnd)) {
-                $_GET['title'] = $title;
-
-                $this->includeViews($viewStart, $viewName, $viewModal, $viewNavbar, $viewBody, $viewEnd, $args);
-
-                unset($_GET['title']);
-            } else {
-                $viewBody = $this->path . 'base/error.phtml';
-                $this->includeViews($viewStart, $viewName, $viewModal, $viewNavbar, $viewBody, $viewEnd, $args);
-            }
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            die;
+        if (!file_exists($viewStart) && file_exists($viewBody) && file_exists($viewEnd)) {
+            $viewBody = $this->path . 'base/error.phtml';
         }
-    }
 
-    /**
-     * @param string $viewStart
-     * @param $viewName
-     * @param string $viewNavbar
-     * @param string $viewBody
-     * @param string $viewEnd
-     * @return void
-     */
-    public function includeViews(string $viewStart, $viewName, $viewModal, string $viewNavbar, string $viewBody, string $viewEnd, array $args): void
-    {
         include_once $viewStart;
         include_once $viewModal;
 
