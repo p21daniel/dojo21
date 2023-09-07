@@ -22,6 +22,7 @@ class Index extends Controller
      */
     public function fail(): void
     {
+        http_response_code(404);
         $this->getView('error', 'base', 'Ops...');
     }
 }

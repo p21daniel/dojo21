@@ -8,7 +8,8 @@
     <section class="cards">
         <div class="card-body">
             <form method="POST" id="objective-form" class="form">
-                <h2 class="jumbotron">Novo Objetivo</h2>
+                <h2><i class="fa-solid fa-plus"></i> Objetivo</h2>
+                <hr class="separator">
                 <div class="form-group ">
                     <label for="title"><span>Título</span></label>
                     <input type="text" name="title" id="title" class="input-form" placeholder="Informe o título" value="<?= $args['oldData']['title'] ?? '' ?>" required>
@@ -20,9 +21,9 @@
                 <div class="form-group">
                     <input type="text" class="input-form hide" name="id" value="<?= $args['oldData']['id'] ?? '' ?>">
                 </div>
-                <div>
-                    <button class="btn" type="submit"><i class="fa-solid fa-plus"></i> Adicionar</button>
-                    <a class="btn" href="<?= $_SERVER['HTTP_REFERER']; ?>"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+                <div class="action">
+                    <button class="btn btn-success" type="submit"><i class="fa-solid fa-plus"></i></button>
+                    <a class="btn btn-primary" href="<?= $_SERVER['HTTP_REFERER']; ?>"><i class="fa-solid fa-arrow-left"></i></a>
                 </div>
             </form>
         </div>

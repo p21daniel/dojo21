@@ -14,7 +14,6 @@ h1 {
 h2 {
     margin-top: 5px;
     margin-bottom: 5px;
-    color: dimgrey;
 }
 
 h3 {
@@ -67,6 +66,11 @@ select {
     box-sizing: content-box;
     margin-bottom: 10px;
     background: ghostwhite;
+    border: 1px solid dimgrey;
+}
+
+select:hover {
+    border: 1px solid dimgrey;
 }
 
 .text-center {
@@ -82,6 +86,66 @@ select {
     margin: 10px;
 }
 
+.separator-card {
+    width: 100%;
+    margin: 10px;
+    color: dimgrey;
+}
+
 section {
     margin: 10px 0;
+}
+
+.btn {
+    display: block;
+    margin-top: 5px;
+    width: 80%;
+    text-align: center;
+    background-color: #212121;
+    text-decoration: none;
+    padding: 4px 0;
+    border-radius: 5px;
+    color: whitesmoke;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-success {
+    background: #4CAF50;
+    color: ghostwhite;
+}
+
+.btn-primary {
+    background: #03A9F4;
+    color: ghostwhite;
+}
+
+.btn-warning {
+    background: #FFEB3B;
+    color: #424242;
+}
+
+.btn-danger {
+    background: #FF5722;
+    color: ghostwhite;
+}
+
+.btn-success:hover {
+    background: #AED581;
+    color: ghostwhite;
+}
+
+.btn-primary:hover {
+    background: #64B5F6;
+    color: ghostwhite;
+}
+
+.btn-danger:hover {
+    background: #FF8A65;
+    color: ghostwhite;
+}
+
+.btn-warning:hover {
+    background: #FFF176;
+    color: #424242;
 }

@@ -5,9 +5,7 @@
 ?>
 
 <main class="container">
-    <div class="jumbotron">
-        <h2 class="text-center">Meus Objetivos</h2>
-    </div>
+    <h2 class="text-center">Minhas OKRs</h2>
     <div class="cards">
         <?php foreach ($args['objectives'] as $objective): ?>
                 <?php if(!$objective['deleted_at']): ?>
@@ -19,8 +17,8 @@
                             <h4>Descrição: <?php echo $objective['description']; ?></h4>
 
                             <div class="action">
-                                <button class="btn" id="objective_remove_button" value="<?= $objective['id'];?>"><i class="fa-solid fa-trash"></i></button>
-                                <button class="btn" id="objective_edit_button" value="<?= $objective['id'];?>"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn btn-warning" id="objective_edit_button" value="<?= $objective['id'];?>"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn btn-danger" id="objective_remove_button" value="<?= $objective['id'];?>"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </div>
 
@@ -36,8 +34,8 @@
                                             <h5><strong>Tipo</strong>: <?= $keyResult['type'] == 1 ? 'Milestone' : 'Porcentagem'   ?></h5>
 
                                         <div class="action">
-                                            <button class="btn" id="key_result_remove_button" value="<?= $keyResult['id'];?>"><i class="fa-solid fa-trash"></i></button>
-                                            <button class="btn" id="key_result_edit_button" value="<?= $keyResult['id'];?>"><i class="fa-solid fa-pen"></i></button>
+                                            <button class="btn btn-danger" id="key_result_edit_button" value="<?= $keyResult['id'];?>"><i class="fa-solid fa-pen"></i></button>
+                                            <button class="btn btn-warning" id="key_result_remove_button" value="<?= $keyResult['id'];?>"><i class="fa-solid fa-trash"></i></button>
                                         </div>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
@@ -48,7 +46,7 @@
         <?php endforeach; ?>
         </div>
         <div class="control">
-            <a class="btn" href="<?= $_SERVER['HTTP_REFERER']; ?>"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+            <a class="btn btn-primary" href="/"><i class="fa-solid fa-house"></i></a>
         </div>
     </section>
 </main>

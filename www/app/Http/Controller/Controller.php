@@ -35,23 +35,37 @@ abstract class Controller
             if (file_exists($viewStart) && file_exists($viewBody) && file_exists($viewEnd)) {
                 $_GET['title'] = $title;
 
-                include_once $viewStart;
-
-                if ($viewName != 'login') {
-                    include_once $viewNavbar;
-                }
-
-                include_once $viewBody;
-                include_once $viewEnd;
+                $this->includeViews($viewStart, $viewName, $viewNavbar, $viewBody, $viewEnd);
 
                 unset($_GET['title']);
             } else {
-                throw new Exception("View not found");
+                $viewBody = $this->path . 'base/error.phtml';
+                $this->includeViews($viewStart, $viewName, $viewNavbar, $viewBody, $viewEnd);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
             die;
         }
+    }
+
+    /**
+     * @param string $viewStart
+     * @param $viewName
+     * @param string $viewNavbar
+     * @param string $viewBody
+     * @param string $viewEnd
+     * @return void
+     */
+    public function includeViews(string $viewStart, $viewName, string $viewNavbar, string $viewBody, string $viewEnd): void
+    {
+        include_once $viewStart;
+
+        if ($viewName != 'login') {
+            include_once $viewNavbar;
+        }
+
+        include_once $viewBody;
+        include_once $viewEnd;
     }
 
     /**

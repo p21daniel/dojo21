@@ -14,10 +14,11 @@ if (isset($args['oldData']['type'])) {
     <section class="cards">
         <div class="card-body">
             <form method="POST" id="key-result-form">
-                <h2 class="jumbotron">Novo Resultado Chave</h2>
+                <h2><i class="fa-solid fa-plus"></i> Resultado Chave</h2>
+                <hr class="separator">
                 <div class="form-group">
                     <label for="title"><span>Título</span></label>
-                    <input type="text" name="title" id="title" class="input-form" value="<?= $args['oldData']['title'] ?? '' ?>">
+                    <input type="text" placeholder="Informe o Título" name="title" id="title" class="input-form" value="<?= $args['oldData']['title'] ?? '' ?>">
                 </div>
                 <div class="form-group">
                     <label for="objective"><span>Objetivo</span></label>
@@ -29,7 +30,7 @@ if (isset($args['oldData']['type'])) {
                 </div>
                 <div class="form-group">
                     <label for="description"><span>Descrição</span></label>
-                    <input type="text" id="description" class="input-form" name="description" value="<?= $args['oldData']['description'] ?? '' ?>">
+                    <input type="text" placeholder="Informe a Descrição" id="description" class="input-form" name="description" value="<?= $args['oldData']['description'] ?? '' ?>">
                 </div>
                 <div class="form-group">
                     <label for="type"><span>Tipo</span></label>
@@ -41,8 +42,10 @@ if (isset($args['oldData']['type'])) {
                 <div class="form-group">
                     <input type="text" class="hide input-form" name="id" value="<?= $args['oldData']['id'] ?? '' ?>">
                 </div>
-                <button class="btn" type="submit"><i class="fa-solid fa-plus"></i> Adicionar</button>
-                <a class="btn" href="<?= $_SERVER['HTTP_REFERER']; ?>"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+                <div class="action">
+                    <button class="btn btn-success" type="submit"><i class="fa-solid fa-plus"></i></button>
+                    <a class="btn btn-primary" href="<?= $_SERVER['HTTP_REFERER']; ?>"><i class="fa-solid fa-arrow-left"></i></a>
+                </div>
             </form>
         </div>
     </section>

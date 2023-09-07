@@ -5,25 +5,6 @@
     flex-direction: column;
 }
 
-.btn {
-    display: block;
-    margin-top: 5px;
-    width: 80%;
-    text-align: center;
-    background-color: #212121;
-    text-decoration: none;
-    padding: 4px 0;
-    border-radius: 5px;
-    color: whitesmoke;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #BDBDBD;
-    color: #212121;
-}
-
 .jumbotron {
     background-color: #212121;
     color: ghostwhite;
@@ -40,6 +21,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    margin-top: 15px;
 }
 
 .control{
@@ -53,11 +35,11 @@
     width: 100px;
 }
 
-.home h2 {
-    margin-bottom: 20px;
+.home h3 {
+
 }
 
-.home h4 {
+.home h3 {
     margin-top: 20px;
 }
 
@@ -68,6 +50,17 @@
     display: flex;
 }
 
+#login-form {
+    border-radius: 5px;
+    box-shadow: 7px 7px 15px 7px rgb(50, 50, 50, 0.20);
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* FORMS */
 .field {
     display: flex;
     justify-content: center;
@@ -83,16 +76,15 @@
     width: 220px;
     background: ghostwhite;
     margin-bottom: 10px;
+    border: 1px solid dimgrey;
 }
 
-#login-form {
-    border-radius: 5px;
-    box-shadow: 7px 7px 15px 7px rgb(50, 50, 50, 0.20);
-    padding: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.input-form:focus {
+    border: 1px solid dimgrey;
+}
+
+.form-group label {
+    margin-top: 10px;
 }
 
 /* NAVBAR */
@@ -109,12 +101,13 @@
 .navbar-itens li {
     display: inline;
     color: ghostwhite;
+    font-size: 10px;
 }
 
 .navbar-itens li a{
     display: inline;
     color: ghostwhite;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 /* OBJECTIVE */
@@ -126,7 +119,7 @@
 }
 
 #objective-form .btn {
-    width: 100px;
+    width: 80px;
 }
 
 /* KEY RESULT */
@@ -150,14 +143,14 @@
 }
 
 .cards .card-body {
-    margin: 15px;
+    margin: 10px;
     padding: 50px;
 }
 
 /* OBJECTIVE */
 .card-body {
     border-radius: 5px;
-    box-shadow: 7px 7px 15px 7px rgb(50, 50, 50, 0.20);
+    box-shadow: 7px 7px 25px 7px rgb(33, 33, 33, 0.30);
     padding: 30px;
     width: 250px;
     display: flex;
@@ -171,6 +164,10 @@
     margin: 5px;
 }
 
+.cards .card-body .jumbotron {
+    padding: 48px;
+}
+
 /* KEY RESULT */
 .key-result-group {
     display: flex;
@@ -179,7 +176,7 @@
     flex-direction: column;
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
+/* MEDIA QUERIES */
 @media only screen and (min-width: 500px) and (max-width: 9999px) {
     .cards {
         display: flex;
@@ -187,13 +184,13 @@
         justify-content: center;
         flex-direction: row;
     }
+
+    .navbar-itens li {
+        font-size: 16px;
+    }
+
+    .navbar-itens li a{
+        margin-left: 15px;
+    }
 }
 
-
-.form-group label {
-    margin-top: 10px;
-}
-
-.cards .card-body .jumbotron {
-    padding: 48px;
-}
