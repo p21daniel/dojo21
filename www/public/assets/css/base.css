@@ -130,6 +130,11 @@ section {
     color: ghostwhite;
 }
 
+.btn-custom {
+    background: #673AB7;
+    color: ghostwhite;
+}
+
 .btn-success:hover {
     background: #AED581;
     color: ghostwhite;
@@ -148,4 +153,9 @@ section {
 .btn-warning:hover {
     background: #FFF176;
     color: #424242;
+}
+
+.btn-custom:hover {
+    background: #7E57C2;
+    color: ghostwhite;
 }

@@ -1,4 +1,4 @@
-CREATE DATABASE okr;
+CREATE DATABASE okr CHARACTER SET utf8 COLLATE utf8_bin;
 
 use okr;
 

@@ -44,20 +44,29 @@
 }
 
 /* LOGIN */
-.login {
-    height: 90vh;
-    width: 100vw;
-    display: flex;
-}
-
 #login-form {
-    border-radius: 5px;
-    box-shadow: 7px 7px 15px 7px rgb(50, 50, 50, 0.20);
-    padding: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.card-body #login-form .btn {
+    width: 100px;
+    margin: 5px;
+}
+
+/* REGISTER */
+#user-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card-body #user-form .btn {
+    width: 100px;
+    margin: 5px;
 }
 
 /* FORMS */
@@ -145,6 +154,11 @@
 .cards .card-body {
     margin: 10px;
     padding: 50px;
+}
+
+.center-card {
+    height: 90vh;
+    display: flex;
 }
 
 /* OBJECTIVE */

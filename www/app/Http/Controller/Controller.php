@@ -35,12 +35,12 @@ abstract class Controller
             if (file_exists($viewStart) && file_exists($viewBody) && file_exists($viewEnd)) {
                 $_GET['title'] = $title;
 
-                $this->includeViews($viewStart, $viewName, $viewNavbar, $viewBody, $viewEnd);
+                $this->includeViews($viewStart, $viewName, $viewNavbar, $viewBody, $viewEnd, $args);
 
                 unset($_GET['title']);
             } else {
                 $viewBody = $this->path . 'base/error.phtml';
-                $this->includeViews($viewStart, $viewName, $viewNavbar, $viewBody, $viewEnd);
+                $this->includeViews($viewStart, $viewName, $viewNavbar, $viewBody, $viewEnd, $args);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -56,11 +56,11 @@ abstract class Controller
      * @param string $viewEnd
      * @return void
      */
-    public function includeViews(string $viewStart, $viewName, string $viewNavbar, string $viewBody, string $viewEnd): void
+    public function includeViews(string $viewStart, $viewName, string $viewNavbar, string $viewBody, string $viewEnd, array $args): void
     {
         include_once $viewStart;
 
-        if ($viewName != 'login') {
+        if (!in_array($viewName, ['login', 'register'])) {
             include_once $viewNavbar;
         }
 

@@ -1,6 +1,6 @@
 <main class="container">
-    <section class="form login">
-        <div class="field">
+    <section class="cards center-card">
+        <div class="card-body">
             <form method="POST" id="login-form" >
                 <h2>Login</h2>
                 <div class="form-group">
@@ -11,8 +11,10 @@
                     <label for="password"><span>Senha</span></label>
                     <input type="password" placeholder="Informe a senha" id="password" class="input-form" name="password" required>
                 </div>
-                <button class="btn" type="submit">Entrar</button>
-                <a href="/user/register" class="btn">Cadastrar</a>
+                <div class="action">
+                    <button class="btn btn-custom" type="submit"><i class="fa-solid fa-door-closed"></i> Entrar</button>
+                    <a href="/user/register" class="btn btn-custom"><i class="fa-regular fa-user"></i> Cadastrar</a>
+                </div>
             </form>
         </div>
     </section>
