@@ -81,6 +81,10 @@ select:hover {
     display: none;
 }
 
+.show {
+    display: block;
+}
+
 .separator {
     width: 100%;
     margin: 10px;

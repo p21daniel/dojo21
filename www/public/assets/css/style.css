@@ -119,6 +119,41 @@
     margin-left: 10px;
 }
 
+/* MODAL */
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-body {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.modal-content {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.close-modal {
+    float: right;
+    margin-bottom: 15px;
+}
+
+.modal-body .close-modal {
+    width: 30px;
+}
+
 /* OBJECTIVE */
 #objective-form {
     display: flex;
@@ -207,4 +242,3 @@
         margin-left: 15px;
     }
 }
-

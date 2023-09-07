@@ -28,6 +28,7 @@ abstract class Controller
     {
         $viewStart = $this->path . 'base/start.phtml';
         $viewNavbar = $this->path . 'base/navbar.phtml';
+        $viewModal = $this->path . 'base/modal.phtml';
         $viewBody = $this->path . $viewFolder . '/' . $viewName . '.phtml';
         $viewEnd = $this->path . 'base/end.phtml';
 
@@ -35,12 +36,12 @@ abstract class Controller
             if (file_exists($viewStart) && file_exists($viewBody) && file_exists($viewEnd)) {
                 $_GET['title'] = $title;
 
-                $this->includeViews($viewStart, $viewName, $viewNavbar, $viewBody, $viewEnd, $args);
+                $this->includeViews($viewStart, $viewName, $viewModal, $viewNavbar, $viewBody, $viewEnd, $args);
 
                 unset($_GET['title']);
             } else {
                 $viewBody = $this->path . 'base/error.phtml';
-                $this->includeViews($viewStart, $viewName, $viewNavbar, $viewBody, $viewEnd, $args);
+                $this->includeViews($viewStart, $viewName, $viewModal, $viewNavbar, $viewBody, $viewEnd, $args);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -56,9 +57,10 @@ abstract class Controller
      * @param string $viewEnd
      * @return void
      */
-    public function includeViews(string $viewStart, $viewName, string $viewNavbar, string $viewBody, string $viewEnd, array $args): void
+    public function includeViews(string $viewStart, $viewName, $viewModal, string $viewNavbar, string $viewBody, string $viewEnd, array $args): void
     {
         include_once $viewStart;
+        include_once $viewModal;
 
         if (!in_array($viewName, ['login', 'register'])) {
             include_once $viewNavbar;

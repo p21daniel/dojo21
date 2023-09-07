@@ -17,15 +17,7 @@ let User = (() => {
                         return;
                     }
 
-                    if (Array.isArray(response.message)) {
-                        response.message.forEach(function (item) {
-                            alert(item);
-                        })
-
-                        return;
-                    }
-
-                    alert(response.message);
+                    Modal.message(response)
                 }
             });
         });

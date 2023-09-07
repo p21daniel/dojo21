@@ -17,7 +17,7 @@ let Objective = (() => {
                         return;
                     }
 
-                    alert(response.message);
+                    Modal.message(response)
                 }
             });
         });
@@ -41,7 +41,7 @@ let Objective = (() => {
                         return;
                     }
 
-                    alert(response.message);
+                    Modal.message(response)
                 }
             });
         })
@@ -64,7 +64,7 @@ let Objective = (() => {
                         return;
                     }
 
-                    alert(response.message);
+                    Modal.message(response)
                 }
             });
         })

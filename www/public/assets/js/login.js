@@ -17,7 +17,7 @@ let Login = (() => {
                         return;
                     }
 
-                    alert(response.message);
+                    Modal.message(response)
                 }
             });
         });
