@@ -26,5 +26,8 @@
  ?>
 <main class="container">
     <?php if($flash): ?>
-        <div class="flash"><?= $flash ?></div>
+        <div class="flash ">
+            <button class="close-flash btn btn-outline">&times;</button>
+            <span><?= $flash ?></span>
+        </div>
     <?php endif;?>

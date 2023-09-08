@@ -225,6 +225,29 @@
     flex-direction: column;
 }
 
+/* FLASH MESSAGE */
+.flash {
+    width: auto;
+    background: #E1BEE7;
+
+    border-radius: 8px;
+}
+
+.flash span{
+    float: left;
+    padding: 30px;
+}
+
+.close-flash {
+    float: right;
+    margin: 20px;
+    box-sizing: content-box;
+}
+
+.flash .close-flash {
+    width: 20px;
+}
+
 /* MEDIA QUERIES */
 @media only screen and (min-width: 500px) and (max-width: 9999px) {
     .cards {

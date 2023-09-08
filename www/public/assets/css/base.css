@@ -139,6 +139,12 @@ section {
     color: ghostwhite;
 }
 
+.btn-outline {
+    border: 1px solid #424242;
+    color: #424242;
+    background: ghostwhite;
+}
+
 .btn-success:hover {
     background: #AED581;
     color: ghostwhite;
@@ -162,4 +168,10 @@ section {
 .btn-custom:hover {
     background: #7E57C2;
     color: ghostwhite;
+}
+
+.btn-outline:hover {
+    border: 1px solid #424242;
+    color: #424242;
+    background: ghostwhite;
 }
