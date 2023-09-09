@@ -17,6 +17,7 @@ class Message
     public const OBJECTIVE_EDITED = 'Objetivo editado com sucesso';
     public const OBJECTIVE_REMOVED = 'Objetivo removido com sucesso';
     public const OBJECTIVE_CONSTRAINT = 'Não é possível remover um objetivo com resultados chave vinculados';
+    public const OBJECTIVE_NOT_INSERTED = 'Nenhum objetivo cadastrado';
 
     public const KEY_RESULT_SAVE_ERROR = 'Ocorreu um problema ao atualizar o resultado chave';
     public const KEY_RESULT_SAVED = 'Resultado chave com sucesso';
