@@ -2,36 +2,51 @@
 
 namespace App\Entity;
 
-use App\Entity\Entity;
-
-
+/**
+ * KeyResult Entity
+ */
 class KeyResultEntity extends Entity
 {
-    private $title;
-    private $description;
-    private $type;
-    private $objectiveId;
+    /**
+     * @var string
+     */
+    private string $title;
 
     /**
-     * @return mixed
+     * @var string
      */
-    public function getTitle()
+    private string $description;
+
+    /**
+     * @var string
+     */
+    private string $type;
+
+    /**
+     * @var int
+     */
+    private int $objectiveId;
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-     * @param mixed $title
+     * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -39,39 +54,39 @@ class KeyResultEntity extends Entity
     /**
      * @param mixed $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @param mixed $type
+     * @param string $type
      */
-    public function setType($type)
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getObjectiveId()
+    public function getObjectiveId(): int
     {
         return $this->objectiveId;
     }
 
     /**
-     * @param mixed $objectiveId
+     * @param int $objectiveId
      */
-    public function setObjectiveId($objectiveId)
+    public function setObjectiveId(int $objectiveId): void
     {
         $this->objectiveId = $objectiveId;
     }

@@ -2,77 +2,92 @@
 
 namespace App\Entity;
 
-use App\Entity\Entity;
-
+/**
+ * Objective Entity
+ */
 class ObjectiveEntity extends Entity
 {
-    private $user;
-    private $title;
-    private $description;
-    private $status;
+    /**
+     * @var int
+     */
+    private int $user;
 
     /**
-     * @return mixed
+     * @var string
      */
-    public function getUser()
+    private string $title;
+
+    /**
+     * @var string
+     */
+    private string $description;
+
+    /**
+     * @var bool
+     */
+    private bool $status;
+
+    /**
+     * @return int
+     */
+    public function getUser(): int
     {
         return $this->user;
     }
 
     /**
-     * @param mixed $user
+     * @param int $user
      */
-    public function setUser($user)
+    public function setUser(int $user): void
     {
         $this->user = $user;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-     * @param mixed $title
+     * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
-     * @param mixed $description
+     * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
-    public function getStatus()
+    public function getStatus(): bool
     {
         return $this->status;
     }
 
     /**
-     * @param mixed $status
+     * @param bool $status
      */
-    public function setStatus($status)
+    public function setStatus(bool $status): void
     {
         $this->status = $status;
     }
-
 }

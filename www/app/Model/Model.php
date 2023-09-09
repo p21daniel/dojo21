@@ -10,8 +10,7 @@ use PDO;
  */
 class Model
 {
-    /** @var PDO $conn */
-    private $conn;
+    private PDO $conn;
 
     /**
      * Constructor to define conn content
@@ -22,9 +21,9 @@ class Model
     }
 
     /**
-     * @return mixed
+     * @return PDO
      */
-    public function getConn()
+    public function getConn(): PDO
     {
         return $this->conn;
     }

@@ -5,11 +5,17 @@ namespace App\Entity;
 use PDO;
 use PDOException;
 
+/**
+ * Base class to connect with mysql
+ */
 class DatabaseConnection
 {
     /** @var PDO|null $connection */
-    public $connection = null;
-    
+    public ?PDO $connection = null;
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $host = 'mysql';
@@ -28,10 +34,12 @@ class DatabaseConnection
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-
     }
 
-    public function getConnection()
+    /**
+     * @return DatabaseConnection|PDO|null
+     */
+    public function getConnection(): DatabaseConnection|PDO|null
     {
         if (!$this->connection) {
             $this->connection = new self();

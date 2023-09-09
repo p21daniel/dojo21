@@ -2,6 +2,9 @@
 
 namespace App\Util;
 
+/**
+ * Message Class
+ */
 class Message
 {
     public const NOT_EQUAL_PASSWORD = 'As senhas não são iguais';

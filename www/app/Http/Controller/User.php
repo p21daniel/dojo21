@@ -31,7 +31,7 @@ class User extends Controller
     /**
      * @return void
      */
-    public function login()
+    public function login(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $messages = [];
@@ -68,7 +68,7 @@ class User extends Controller
     /**
      * @return void
      */
-    public function logout()
+    public function logout(): void
     {
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_destroy();
@@ -81,7 +81,7 @@ class User extends Controller
     /**
      * @return void
      */
-    public function save()
+    public function save(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $messages = [];
@@ -98,7 +98,12 @@ class User extends Controller
                 'password-check' => $passwordCheck
             ], true);
 
-            if((new UserModel())->save($name, $email, $password)) {
+            $user = new \App\Entity\User();
+            $user->setName($name);
+            $user->setEmail($email);
+            $user->setPassword($passwordCheck);
+
+            if((new UserModel())->save($user)) {
                 $_SESSION['flash'] = Message::USER_REGISTERED;
 
                 $this->sendJson([

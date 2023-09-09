@@ -4,7 +4,6 @@ namespace App\Http\Controller;
 
 use App\Util\Message;
 use App\Util\Validator;
-use Exception;
 
 /**
  *  Abstract Controller responsible to centralize all common methods between controllers
@@ -52,7 +51,8 @@ abstract class Controller
      * @param bool $checkPassword
      * @return void
      */
-    protected function baseFormCheck (Array $fields, bool $checkPassword = false): void{
+    protected function baseFormCheck (Array $fields, bool $checkPassword = false): void
+    {
         $messages = (new Validator())->isEmpty($fields);
 
         if ($checkPassword && !Validator::isSamePassword($fields['password'], $fields['password-check'])) {
@@ -73,7 +73,8 @@ abstract class Controller
      * @param $json
      * @return void
      */
-    protected function sendJson ($json): void{
+    protected function sendJson ($json): void
+    {
         echo json_encode($json);
         exit;
     }

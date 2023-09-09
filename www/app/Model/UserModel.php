@@ -10,21 +10,20 @@ use App\Entity\User;
 class UserModel extends Model
 {
     /**
-     * @param $name
-     * @param $email
-     * @param $password
+     * @param User $user
      * @return bool
      */
-    public function save($name, $email, $password): bool
+    public function save(User $user): bool
     {
-        $password = md5($password);
+        $password = md5($user->getPassword());
 
         $statement = $this->getConn()->prepare("INSERT INTO user (name, email, password) values (:name, :email, :password)");
-        $statement->bindParam(':name', $name);
-        $statement->bindParam(':email', $email);
-        $statement->bindParam(':password', $password);
 
-        $statement->execute();
+        $statement->execute([
+            ':name' => $user->getName(),
+            ':email' =>  $user->getEmail(),
+            ':password' => $password,
+        ]);
 
         if ($statement->rowCount() > 0) {
             return true;

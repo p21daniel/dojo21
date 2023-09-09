@@ -2,9 +2,17 @@
 
 namespace App\Util;
 
+/**
+ * Validator Class
+ */
 class Validator
 {
-    public function isEmpty(Array $fields) {
+    /**
+     * @param array $fields
+     * @return array
+     */
+    public function isEmpty(Array $fields): array
+    {
         $blankFields = [];
 
         foreach ($fields as $key => $field) {
@@ -16,7 +24,12 @@ class Validator
         return $blankFields;
     }
 
-    public static function isSamePassword($password, $passwordCheck)
+    /**
+     * @param $password
+     * @param $passwordCheck
+     * @return bool
+     */
+    public static function isSamePassword($password, $passwordCheck): bool
     {
         if ($password !== $passwordCheck) {
             return false;
